@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple HTML form</title>
@@ -74,5 +75,243 @@
 
         <input type="submit" value="Register">
     </form>
+=======
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+    }
+
+    .container {
+      display: flex;
+      gap: 30px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      min-width: 700px;
+    }
+
+    /* Left Panel - Add Task */
+    .add-task {
+      flex: 1;
+      background: #fff;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .add-task h2 {
+      margin: 0;
+      text-align: center;
+      color: #764ba2;
+    }
+
+    .add-task input, .add-task textarea {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 14px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .add-task input:focus, .add-task textarea:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 8px rgba(102,126,234,0.3);
+    }
+
+    .add-task button {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .add-task button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(118,75,162,0.4);
+    }
+
+    /* Right Panel - Task List */
+    .task-list {
+      flex: 1.5;
+      background: #fff;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      display: none; /* hidden when no tasks */
+    }
+
+    .task-list h2 {
+      margin: 0 0 15px 0;
+      text-align: center;
+      color: #667eea;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      background: #f8f8f8;
+      margin-bottom: 12px;
+      padding: 15px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+      transition: 0.3s;
+    }
+
+    li:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    .task-title {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .task-desc {
+      font-size: 13px;
+      color: #555;
+    }
+
+    .task-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .task-actions button {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .complete-btn {
+      background: #28a745;
+      color: white;
+    }
+    .complete-btn:hover {
+      background: #218838;
+    }
+
+    .fail-btn {
+      background: #dc3545;
+      color: white;
+    }
+    .fail-btn:hover {
+      background: #c82333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Add Task -->
+    <div class="add-task">
+      <h2>Add Task</h2>
+      <input type="text" id="taskTitle" placeholder="Task Title">
+      <textarea id="taskDesc" rows="3" placeholder="Task Description"></textarea>
+      <button type="button" onclick="addTask()">Add Task</button>
+    </div>
+
+    <!-- Task List -->
+    <div class="task-list" id="taskSection">
+      <h2>My Tasks</h2>
+      <ul id="taskList"></ul>
+    </div>
+  </div>
+
+  <script>
+    function addTask() {
+      const title = document.getElementById("taskTitle").value.trim();
+      const desc = document.getElementById("taskDesc").value.trim();
+
+      if (title === "" && desc === "") return;
+
+      const li = document.createElement("li");
+
+      const taskTitle = document.createElement("div");
+      taskTitle.className = "task-title";
+      taskTitle.textContent = title || "Untitled Task";
+
+      const taskDesc = document.createElement("div");
+      taskDesc.className = "task-desc";
+      taskDesc.textContent = desc || "No description provided";
+
+      const actions = document.createElement("div");
+      actions.className = "task-actions";
+
+      const completeBtn = document.createElement("button");
+      completeBtn.type = "button";
+      completeBtn.textContent = "Completed";
+      completeBtn.className = "complete-btn";
+      completeBtn.onclick = () => {
+        li.remove();
+        toggleTaskSection();
+      };
+
+      const failBtn = document.createElement("button");
+      failBtn.type = "button";
+      failBtn.textContent = "Failed";
+      failBtn.className = "fail-btn";
+      failBtn.onclick = () => {
+        alert("You have failed to complete a task ❌");
+        li.remove();
+        toggleTaskSection();
+      };
+
+      actions.appendChild(completeBtn);
+      actions.appendChild(failBtn);
+
+      li.appendChild(taskTitle);
+      li.appendChild(taskDesc);
+      li.appendChild(actions);
+
+      document.getElementById("taskList").appendChild(li);
+
+      // Show task section
+      document.getElementById("taskSection").style.display = "block";
+
+      // Clear inputs
+      document.getElementById("taskTitle").value = "";
+      document.getElementById("taskDesc").value = "";
+    }
+
+    function toggleTaskSection() {
+      const taskList = document.getElementById("taskList");
+      if (taskList.children.length === 0) {
+        document.getElementById("taskSection").style.display = "none";
+      }
+    }
+  </script>
+>>>>>>> 1e4d308 (to-do list added)
 </body>
 </html>
